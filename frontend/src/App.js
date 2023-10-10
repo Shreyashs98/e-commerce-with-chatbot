@@ -1,6 +1,6 @@
-import './App.css';
-import Home from './pages/Home';
-import LoginPage from './pages/LoginPage';
+import "./App.css";
+import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -9,7 +9,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import SignupPage from './pages/SignupPage';
+import SignupPage from "./pages/SignupPage";
 
 const router = createBrowserRouter([
   {
