@@ -7,7 +7,7 @@ const SignupPage = () => {
           <img
             className="h-12 w-12 rounded-full"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnmFqTsudrW1t0t1FfFV7xJ_2IIFIRPe9sblDG_3PUlCfiSb20Eppgl3kb-TGBmLPCfyI&usqp=CAU"
-            alt="Your Company"
+            alt="e-commerce"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create a account
