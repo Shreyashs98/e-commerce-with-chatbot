@@ -9,12 +9,19 @@ export function fetchAllProducts() {
 }
 
 export function fetchProductsByFilters(filter) {
-// filter = {"category":"smartphones"}
-  let queryString ='';
+// filter = {"category":["smartphones","laptops"]}
+//sort={_sort:"price",_order="desc"}
 
-  for(let key in filter ){
-    queryString += `${key}=${filter[key]}&`
-  }
+//TODO: on server will support multivalues
+
+let queryString ='';
+for(let key in filter ){
+  queryString += `${key}=${filter[key]}&`
+
+}
+  
+
+
 
   return new Promise(async (resolve) =>{
     //TODO: we will not hard-code server URL here
