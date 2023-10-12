@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProductsAsync , selectAllProducts } from "../productSlice";
+import { fetchAllProductsAsync , selectAllProducts, fetchProductsByFiltersAsync } from "../productSlice";
 
 import { Fragment } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
@@ -29,38 +29,37 @@ const sortOptions = [
 
 const filters = [
   {
-    id: "color",
-    name: "Color",
+    id: "brand",
+    name: "Brands",
     options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
+      { value: "Apple", label: "Apple", checked: false },
+      { value: "Samsung", label: "Samsung", checked: false },
+      { value: "OPPO", label: "OPPO", checked: false },
+      { value: "Huawei", label: "Huawei", checked: false },
+      { value: "Infinix", label: "Infinix", checked: false },
+      { value: "Microsoft Surface", label: "Microsoft Surface", checked: false },
+      { value: "Impression of Acqua Di Gio", label: "Impression of Acqua Di Gio", checked: false },
+      { value: "Royal_Mirage", label: "Royal_Mirage", checked: false },
+      { value: "Fog Scent Xpressio", label: "Fog Scent Xpressio", checked: false },
+      { value: "Al Munakh", label: "Al Munakh", checked: false },
+      { value: "Lord - Al-Rehab", label: "Lord - Al-Rehab", checked: false },
+      { value: "L'Oreal Paris", label: "L'Oreal Paris", checked: false },
+      { value: "Hemani Tea", label: "Hemani Tea", checked: false },
+      { value: "Dermive", label: "Dermive", checked: false },
+      { value: "ROREC White Rice", label: "ROREC White Rice", checked: false },
+      { value: "Fair & Clear", label: "Fair & Clear", checked: false },
     ],
   },
   {
     id: "category",
     name: "Category",
     options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
-    ],
-  },
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
+      { value: "smartphones", label: "smartphones", checked: false },
+      { value: "laptops", label: "laptops", checked: false },
+      { value: "fragrances", label: "fragrances", checked: true },
+      { value: "skincare", label: "skincare", checked: false },
+      { value: "groceries", label: "groceries", checked: false },
+      { value: "home-decoration", label: "home decoration", checked: false },
     ],
   },
 ];
@@ -72,7 +71,16 @@ function classNames(...classes) {
 export default function ProductList() {
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const products = useSelector(selectAllProducts)
+  const products = useSelector(selectAllProducts);
+  const [filter, setFilter]= useState({});
+
+const handleFilter = (e,section,option) => {
+
+  const newFilter = {...filter,[section.id]:option.value};
+  setFilter(newFilter)
+  dispatch(fetchProductsByFiltersAsync(newFilter))
+
+}
 
   useEffect(()=>{
     dispatch(fetchAllProductsAsync())
@@ -167,7 +175,8 @@ export default function ProductList() {
                                       name={`${section.id}[]`}
                                       defaultValue={option.value}
                                       type="checkbox"
-                                      defaultChecked={option.checked}
+                                        
+                                      onChange={e=>handleFilter(e,section,option)}
                                       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                     />
                                     <label
@@ -309,7 +318,8 @@ export default function ProductList() {
                                   name={`${section.id}[]`}
                                   defaultValue={option.value}
                                   type="checkbox"
-                                  defaultChecked={option.checked}
+                                    
+                                  onChange={e=>handleFilter(e,section,option)}
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label
