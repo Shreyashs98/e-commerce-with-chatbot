@@ -1,14 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-<<<<<<< HEAD
-import { fetchAllProducts,fetchProductsByFilters,fetchBrands,fetchCategories } from './productAPI';
 
-const initialState = {
-  products: [],
-  brands:[],
-  categories:[],
-  status: 'idle',
-  totalItems:0,
-=======
+
 import {
   fetchAllProducts,
   fetchProductsByFilters,
@@ -26,7 +18,7 @@ const initialState = {
   status: 'idle',
   totalItems: 0,
   selectedProduct: null,
->>>>>>> 3a48d070471b1a5a6afeb2f746ece4403e247a94
+
 };
 
 export const fetchAllProductsAsync = createAsyncThunk(
@@ -49,13 +41,9 @@ export const fetchProductByIdAsync = createAsyncThunk(
 
 export const fetchProductsByFiltersAsync = createAsyncThunk(
   'product/fetchProductsByFilters',
-<<<<<<< HEAD
+
   async ({filter,sort,pagination}) => {
     const response = await fetchProductsByFilters(filter,sort,pagination);
-=======
-  async ({ filter, sort, pagination }) => {
-    const response = await fetchProductsByFilters(filter, sort, pagination);
->>>>>>> 3a48d070471b1a5a6afeb2f746ece4403e247a94
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -78,9 +66,6 @@ export const fetchCategoriesAsync = createAsyncThunk(
   }
 );
 
-<<<<<<< HEAD
-
-=======
 export const createProductAsync = createAsyncThunk(
   'product/create',
   async (product) => {
@@ -96,7 +81,6 @@ export const updateProductAsync = createAsyncThunk(
     return response.data;
   }
 );
->>>>>>> 3a48d070471b1a5a6afeb2f746ece4403e247a94
 
 export const productSlice = createSlice({
   name: 'product',
@@ -137,9 +121,6 @@ export const productSlice = createSlice({
         state.status = 'idle';
         state.categories = action.payload;
       })
-<<<<<<< HEAD
-      
-=======
       .addCase(fetchProductByIdAsync.pending, (state) => {
         state.status = 'loading';
       })
@@ -166,23 +147,11 @@ export const productSlice = createSlice({
         state.selectedProduct = action.payload;
 
       });
->>>>>>> 3a48d070471b1a5a6afeb2f746ece4403e247a94
   },
 });
 
 export const { clearSelectedProduct } = productSlice.actions;
 
-<<<<<<< HEAD
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectAllProducts = (state) => state.product.products;
-export const selectBrands = (state) => state.product.brands;
-export const selectCategories = (state) => state.product.categories;
-export const selectTotalItems = (state) => state.product.totalItems;
-export default productSlice.reducer;
-=======
 export const selectAllProducts = (state) => state.product.products;
 export const selectBrands = (state) => state.product.brands;
 export const selectCategories = (state) => state.product.categories;
@@ -192,4 +161,3 @@ export const selectProductListStatus = (state) => state.product.status;
 export const selectTotalItems = (state) => state.product.totalItems;
 
 export default productSlice.reducer;
->>>>>>> 3a48d070471b1a5a6afeb2f746ece4403e247a94

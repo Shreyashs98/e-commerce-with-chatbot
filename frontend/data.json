@@ -2350,12 +2350,6 @@
       "value": "lighting",
       "label": "lighting",
       "checked": false
-<<<<<<< HEAD
-    }
-  ]
-}
-  
-=======
     }
   ],
   "users": [
@@ -3423,4 +3417,3 @@
     }
   ]
 }
->>>>>>> 3a48d070471b1a5a6afeb2f746ece4403e247a94
