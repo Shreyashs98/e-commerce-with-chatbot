@@ -26,7 +26,7 @@ server.use('/cart',cartRouter.router)
 main().catch(err=> console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/ecommerce');
+    await mongoose.connect('mongodb+srv://s09082003:hsshreyas00@cluster0.umllk4h.mongodb.net/e-commerce-chatbot');
     console.log('database connected')
 }
 
