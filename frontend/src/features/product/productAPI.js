@@ -21,10 +21,10 @@ export function fetchProductsByFilters(filter,sort,pagination) {
      queryString += `${key}=${lastCategoryValue}&`;
     }
   }
-  for(let key in sort){
+ for(let key in sort){
    queryString += `${key}=${sort[key]}&`;
   }
-  for(let key in pagination){
+ for(let key in pagination){
    queryString += `${key}=${pagination[key]}&`;
   }
   
