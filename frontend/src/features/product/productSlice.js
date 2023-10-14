@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 
 import {
-  fetchAllProducts,
+  // fetchAllProducts,
   fetchProductsByFilters,
   fetchBrands,
   fetchCategories,

@@ -103,7 +103,7 @@ export default function AdminProductList() {
   useEffect(() => {
     dispatch(fetchBrandsAsync());
     dispatch(fetchCategoriesAsync());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="bg-white">
