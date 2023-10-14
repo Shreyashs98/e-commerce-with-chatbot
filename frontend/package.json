@@ -5,6 +5,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@material-tailwind/react": "^2.1.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@stripe/react-stripe-js": "^2.3.1",
     "@stripe/stripe-js": "^2.1.7",

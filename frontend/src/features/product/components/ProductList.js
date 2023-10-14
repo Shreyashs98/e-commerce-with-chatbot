@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Carousel } from "@material-tailwind/react";
 import {
   fetchBrandsAsync,
   fetchCategoriesAsync,
@@ -125,6 +126,51 @@ export default function ProductList() {
         ></MobileFilter>
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Carousel
+      autoPlay={true} // Enables automatic transitioning
+      interval={2000} // Set the duration for each slide in milliseconds (2 seconds in this example)
+      showStatus={false} // Hide the status bar
+      showThumbs={false} // Hide the thumbnail navigation
+      className="rounded-xl sale-banner-carousel"
+      style={{ maxHeight: '12rem' }} // Customize the width as per your requirements
+    >
+      <div>
+        <img
+          src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/a5e0ee3cd4a6ca74.jpg?q=20"
+          alt="saleimage 1"
+        />
+      </div>
+      <div>
+        <img
+          src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/1ac81f8dc3185d53.jpg?q=20"
+          alt="saleimage 2"
+        />
+      </div>
+      <div>
+        <img
+          src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/99fae2c9891a1c0c.jpeg?q=20"
+          alt="saleimage 3"
+        />
+      </div>
+      <div>
+        <img
+          src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/a5e0ee3cd4a6ca74.jpg?q=20"
+          alt="saleimage 1"
+        />
+      </div>
+      <div>
+        <img
+          src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/1ac81f8dc3185d53.jpg?q=20"
+          alt="saleimage 2"
+        />
+      </div>
+      <div>
+        <img
+          src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/99fae2c9891a1c0c.jpeg?q=20"
+          alt="saleimage 3"
+        />
+      </div>
+    </Carousel>
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               All Products

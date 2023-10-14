@@ -10,6 +10,7 @@ function Footer() {
               <div className="flex items-center border w-auto rounded-lg px-4 py-2 w-52 mx-2">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/888/888857.png"
+                  alt=""
                   className="w-7 md:w-8"
                 />
                 <div className="text-left ml-3">
@@ -20,6 +21,7 @@ function Footer() {
               <div className="flex items-center border w-auto rounded-lg px-4 py-2 w-44 mx-2">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/888/888841.png"
+                  alt=""
                   className="w-7 md:w-8"
                 />
                 <div className="text-left ml-3">
