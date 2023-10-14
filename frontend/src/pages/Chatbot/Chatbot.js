@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import "./Chatbot.css"; // Import the external CSS file
 import NavBar from "../../features/navbar/Navbar";
 
