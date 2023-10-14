@@ -1,10 +1,9 @@
-import { Counter } from './features/counter/Counter';
 import './App.css';
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CartPage from './pages/CartPage';
 import Checkout from './pages/Checkout';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -27,6 +26,7 @@ import AdminProductFormPage from './pages/AdminProductFormPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
 import { positions, Provider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import Chatbot from './pages/Chatbot/Chatbot';
 
 const options = {
   timeout: 5000,
@@ -137,6 +137,10 @@ const router = createBrowserRouter([
   {
     path: '*',
     element: <PageNotFound></PageNotFound>,
+  },
+  {
+    path: '/chatbot',
+    element: <Chatbot></Chatbot>,
   },
 ]);
 
