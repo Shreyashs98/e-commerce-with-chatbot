@@ -98,7 +98,7 @@ function NavBar({ children }) {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={user.imageUrl}
+                              src="https://hotpot.ai/images/site/ai/headshot_maker/style_gallery/13.png"//{user.imageUrl}
                               alt=""
                             />
                           </Menu.Button>
