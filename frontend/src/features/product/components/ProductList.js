@@ -65,6 +65,14 @@ export default function ProductList() {
       options: brands,
     },
   ];
+  const imageUrls = [
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/1928ce43c778cd9f.jpg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/1ac81f8dc3185d53.jpg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/99fae2c9891a1c0c.jpeg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/4942953de2f86a9c.jpeg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/a6d049a34b1a2468.jpg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/337b77b5689fc3e4.jpeg?q=20",
+  ];
 
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
@@ -131,36 +139,21 @@ export default function ProductList() {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6">
           <Carousel
             autoPlay={true}
-            interval={2000}
+            interval={3000}
             showStatus={false}
             showThumbs={false}
             infiniteLoop={true}
             className="sale-banner-carousel"
             style={{
               maxHeight: "12rem",
-              maxWidth:"15px",
               borderRadius: "20px", // Adjust the radius as per your preference
             }}
           >
-            <div>
-              <img
-                src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/a5e0ee3cd4a6ca74.jpg?q=20"
-                alt="saleimage 1"
-              />
-            </div>
-            <div>
-              <img
-                src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/1ac81f8dc3185d53.jpg?q=20"
-                alt="saleimage 2"
-              />
-            </div>
-            <div>
-              <img
-                src="https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/99fae2c9891a1c0c.jpeg?q=20"
-                alt="saleimage 3"
-              />
-            </div>
-            {/* Additional images go here */}
+            {imageUrls.map((imageUrl, index) => (
+              <div key={index}>
+                <img src={imageUrl} alt={`saleimagebanner ${index + 1}`} />
+              </div>
+            ))}
           </Carousel>
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
