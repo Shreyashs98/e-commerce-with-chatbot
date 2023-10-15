@@ -21,7 +21,8 @@ function Chatbot() {
       if (query.toLowerCase().includes("hello")) {
         botResponse = "Hello there! How can I assist you?";
       } else if (query.toLowerCase().includes("product")) {
-        botResponse = "We have a wide range of products. What are you looking for?";
+        botResponse =
+          "We have a wide range of products. What are you looking for?";
       } else {
         botResponse = "Line Busy Please Try Later";
       }
