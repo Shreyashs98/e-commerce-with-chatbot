@@ -39,7 +39,7 @@ function Chatbot() {
       <NavBar>
         <div className="chatbot-container">
           <div className="chatbot-card">
-            <p className="chatbot-title">E-Commerce Chatbot</p>
+            <p className="chatbot-title">Chatbot</p>
             <div className="chatbot-messages">
               {chatbotResponses.map((response, index) => (
                 <div key={index} className={`chatbot-${response.type}`}>
