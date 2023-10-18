@@ -1,8 +1,24 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { Carousel } from "@material-tailwind/react";
+import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  XMarkIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+} from "@heroicons/react/24/outline";
+import {
+  PlusIcon,
+  MinusIcon,
+  Squares2X2Icon,
+  ChevronDownIcon,
+  FunnelIcon,
+  // ChevronLeftIcon,
+  // ChevronRightIcon,
+  StarIcon,
+} from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Grid } from "react-loader-spinner";
 
 import {
   fetchBrandsAsync,
@@ -14,27 +30,9 @@ import {
   selectProductListStatus,
   selectTotalItems,
 } from "../productSlice";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  XMarkIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
-} from "@heroicons/react/24/outline";
-import {
-  // ChevronLeftIcon,
-  // ChevronRightIcon,
-  StarIcon,
-} from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+
 import { ITEMS_PER_PAGE, discountedPrice } from "../../../app/constants";
 import Pagination from "../../common/Pagination";
-import { Grid } from "react-loader-spinner";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
@@ -77,12 +75,11 @@ export default function ProductList() {
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
 
   const handleFilter = (e, section, option) => {
-    console.log(e.target.checked);
     const newFilter = { ...filter };
-    // TODO : on server it will support multiple categories
     if (e.target.checked) {
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -95,27 +92,27 @@ export default function ProductList() {
       );
       newFilter[section.id].splice(index, 1);
     }
-    console.log({ newFilter });
-
     setFilter(newFilter);
   };
 
   const handleSort = (e, option) => {
     const sort = { _sort: option.sort, _order: option.order };
-    console.log({ sort });
     setSort(sort);
   };
 
   const handlePage = (page) => {
-    console.log({ page });
     setPage(page);
   };
 
   useEffect(() => {
+    // Construct the `pagination` and `filter` objects with your search term
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
-    // TODO : Server will filter deleted products
-  }, [dispatch, filter, sort, page]);
+    const filterParams = { ...filter, _q: searchTerm }; // Include the search term
+
+    dispatch(
+      fetchProductsByFiltersAsync({ filter: filterParams, sort, pagination })
+    );
+  }, [dispatch, filter, sort, page, searchTerm]);
 
   useEffect(() => {
     setPage(1);
@@ -125,6 +122,10 @@ export default function ProductList() {
     dispatch(fetchBrandsAsync());
     dispatch(fetchCategoriesAsync());
   }, [dispatch]);
+
+  const filteredProducts = products.filter((product) => {
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="bg-white">
@@ -146,7 +147,7 @@ export default function ProductList() {
             className="sale-banner-carousel"
             style={{
               maxHeight: "12rem",
-              borderRadius: "20px", // Adjust the radius as per your preference
+              borderRadius: "20px",
             }}
           >
             {imageUrls.map((imageUrl, index) => (
@@ -159,7 +160,6 @@ export default function ProductList() {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               All Products
             </h1>
-
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
@@ -171,7 +171,6 @@ export default function ProductList() {
                     />
                   </Menu.Button>
                 </div>
-
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
@@ -205,6 +204,30 @@ export default function ProductList() {
                   </Menu.Items>
                 </Transition>
               </Menu>
+              <Link to="/chatbot">
+                <div
+                  id="chatButton"
+                  style={{
+                    backgroundColor: "#0077B5",
+                    color: "#fff",
+                    padding: "10px",
+                    borderRadius: "60px",
+                    display: "inline-block",
+                    maxWidth: "70%",
+                    border: "2px solid #0077B5",
+                    position: "fixed",
+                    right: "0",
+                    bottom: "2rem",
+                    cursor: "pointer",
+                    zIndex: 9999, // Set a high z-index value
+                  }}
+                >
+                  <ChatBubbleOvalLeftEllipsisIcon
+                    className="h-6 w-6"
+                    aria-hidden="true"
+                  />
+                </div>
+              </Link>
 
               <button
                 type="button"
@@ -223,6 +246,15 @@ export default function ProductList() {
               </button>
             </div>
           </div>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <input
+              type="text"
+              className="h-10 px-5 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Search products"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
@@ -234,39 +266,15 @@ export default function ProductList() {
                 handleFilter={handleFilter}
                 filters={filters}
               ></DesktopFilter>
-              {/* Product grid */}
               <div className="lg:col-span-3">
-                <ProductGrid products={products} status={status}></ProductGrid>
+                <ProductGrid
+                  products={filteredProducts}
+                  status={status}
+                ></ProductGrid>
               </div>
-              {/* Product grid end */}
             </div>
           </section>
 
-          {/* Chatbot */}
-          <Link to="/chatbot">
-            <div
-              id="chatButton"
-              style={{
-                backgroundColor: "#0077B5",
-                color: "#fff",
-                padding: "10px",
-                borderRadius: "10px",
-                display: "inline-block",
-                maxWidth: "70%",
-                border: "2px solid #0077B5",
-                position: "absolute",
-                right: "0",
-                cursor: "pointer",
-              }}
-            >
-              <ChatBubbleOvalLeftEllipsisIcon
-                className="h-6 w-6"
-                aria-hidden="true"
-              />
-            </div>
-          </Link>
-
-          {/* section of product and filters ends */}
           <Pagination
             page={page}
             setPage={setPage}
@@ -327,7 +335,6 @@ function MobileFilter({
                 </button>
               </div>
 
-              {/* Filters */}
               <form className="mt-4 border-t border-gray-200">
                 {filters.map((section) => (
                   <Disclosure
@@ -461,11 +468,11 @@ function ProductGrid({ products, status }) {
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
           {status === "loading" ? (
             <Grid
-              height="80"
-              width="80"
+              height={80}
+              width={80}
               color="rgb(79, 70, 229) "
               ariaLabel="grid-loading"
-              radius="12.5"
+              radius={12.5}
               wrapperStyle={{}}
               wrapperClass=""
               visible={true}
@@ -513,7 +520,18 @@ function ProductGrid({ products, status }) {
                     <p className="text-sm text-red-400">out of stock</p>
                   </div>
                 )}
-                {/* TODO: will not be needed when backend is implemented */}
+                {product.hot && (
+                  <div className="absolute z-10 top-4 right-4">
+                    <div
+                      className="text-white bg-red-500 p-2 rounded-full"
+                      style={{
+                        backgroundColor: "#f5929f",
+                      }}
+                    >
+                      hot
+                    </div>
+                  </div>
+                )}
               </div>
             </Link>
           ))}
