@@ -16,7 +16,7 @@ exports.loginUser = async (req, res) => {
       { email: req.body.email },
     ).exec();
     // TODO: this is just temporary, we will use strong password auth
-    console.log({ user });
+    //console.log({ user });
     if (!user) {
       res.status(401).json({ message: "no such user email" });
     } else if (user.password === req.body.password) {

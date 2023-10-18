@@ -59,10 +59,11 @@ export default function AdminProductList() {
   const [sort, setSort] = useState({});
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [page, setPage] = useState(1);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleFilter = (e, section, option) => {
-    console.log(e.target.checked);
     const newFilter = { ...filter };
-    // TODO : on server it will support multiple categories
     if (e.target.checked) {
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -75,26 +76,28 @@ export default function AdminProductList() {
       );
       newFilter[section.id].splice(index, 1);
     }
-    console.log({ newFilter });
 
     setFilter(newFilter);
   };
 
   const handleSort = (e, option) => {
-    const sort = { _sort: option.sort, _order: option.order };
-    console.log({ sort });
-    setSort(sort);
+    const newSort = { _sort: option.sort, _order: option.order };
+    setSort(newSort);
   };
 
   const handlePage = (page) => {
-    console.log({ page });
     setPage(page);
   };
 
   useEffect(() => {
+    // Construct the `pagination` and `filter` objects with your search term
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination, admin:true }));
-  }, [dispatch, filter, sort, page]);
+    const filterParams = { ...filter, _q: searchTerm }; // Include the search term
+
+    dispatch(
+      fetchProductsByFiltersAsync({ filter: filterParams, sort, pagination })
+    );
+  }, [dispatch, filter, sort, page, searchTerm]);
 
   useEffect(() => {
     setPage(1);
@@ -104,6 +107,11 @@ export default function AdminProductList() {
     dispatch(fetchBrandsAsync());
     dispatch(fetchCategoriesAsync());
   }, [dispatch]);
+
+  // Step 3: Handle the search query changes and store it in the state variable
+  const filteredProducts = products.filter((product) => {
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="bg-white">
@@ -184,7 +192,15 @@ export default function AdminProductList() {
               </button>
             </div>
           </div>
-
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <input
+              type="text"
+              className="h-10 px-5 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Search products"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
               Products
@@ -206,7 +222,9 @@ export default function AdminProductList() {
                     Add New Product
                   </Link>
                 </div>
-                <ProductGrid products={products}></ProductGrid>
+                <ProductGrid
+                  products={filteredProducts}
+                ></ProductGrid>
               </div>
               {/* Product grid end */}
             </div>
@@ -526,6 +544,18 @@ function ProductGrid({ products }) {
                   {product.stock<=0 && (
                   <div>
                     <p className="text-sm text-red-400">out of stock</p>
+                  </div>
+                )}
+                {product.hot && (
+                  <div className="absolute z-10 top-4 right-4">
+                    <div
+                      className="text-white bg-red-500 p-2 rounded-full"
+                      style={{
+                        backgroundColor: "#f5929f",
+                      }}
+                    >
+                      hot
+                    </div>
                   </div>
                 )}
                 </div>

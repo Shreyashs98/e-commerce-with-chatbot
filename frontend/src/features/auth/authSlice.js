@@ -27,7 +27,7 @@ export const checkUserAsync = createAsyncThunk(
     return response.data;
     }
     catch(error){
-      console.log(error)
+      //console.log(error)
       return rejectWithValue(error)
     }
     
