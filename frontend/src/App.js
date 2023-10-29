@@ -26,7 +26,7 @@ import AdminProductFormPage from "./pages/AdminProductFormPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
 import { positions, Provider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import Chatbot from "./pages/Chatbot/Chatbot";
+// import Chatbot from "./pages/Chatbot/Chatbot";
 
 const options = {
   timeout: 5000,
@@ -138,10 +138,10 @@ const router = createBrowserRouter([
     path: "*",
     element: <PageNotFound></PageNotFound>,
   },
-  {
-    path: "/chatbot",
-    element: <Chatbot></Chatbot>,
-  },
+  // {
+  //   path: "/chatbot",
+  //   element: <Chatbot></Chatbot>,
+  // },
 ]);
 
 function App() {

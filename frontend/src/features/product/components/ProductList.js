@@ -204,7 +204,7 @@ export default function ProductList() {
                   </Menu.Items>
                 </Transition>
               </Menu>
-              <Link to="/chatbot">
+              {/* <Link to="/chatbot">
                 <div
                   id="chatButton"
                   style={{
@@ -227,7 +227,7 @@ export default function ProductList() {
                     aria-hidden="true"
                   />
                 </div>
-              </Link>
+              </Link> */}
 
               <button
                 type="button"

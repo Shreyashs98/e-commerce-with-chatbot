@@ -1,66 +1,25 @@
-import React, { useState } from "react";
-import "./Chatbot.css"; // Import the external CSS file
-import NavBar from "../../features/navbar/Navbar";
+import React, { Component } from 'react'
 
-function Chatbot() {
-  const [userQuery, setUserQuery] = useState(""); // State to store the user's query
-  const [chatbotResponses, setChatbotResponses] = useState([]); // State to store chatbot responses
+export class Chatbot extends Component {
 
-  const handleUserQueryChange = (e) => {
-    setUserQuery(e.target.value);
-  };
+  componentDidMount(){
+    (function(d, m){
+      var kommunicateSettings = 
+          {"appId":"2fc1a8a2c3468a1e9da3fc8d7947a19ac","popupWidget":true,"automaticChatOpenOnNavigation":true};
+      var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+      window.kommunicate = m; m._globals = kommunicateSettings;
+  })(document, window.kommunicate || {});
+  }
 
-  const handleSendMessage = () => {
-    const query = userQuery.trim(); // Remove leading/trailing spaces
-    if (query) {
-      const newResponses = [...chatbotResponses];
-      newResponses.push({ type: "user", text: query });
-
-      // Dummy chatbot responses based on user input
-      let botResponse = "";
-      if (query.toLowerCase().includes("hello")) {
-        botResponse = "Hello there! How can I assist you?";
-      } else if (query.toLowerCase().includes("product")) {
-        botResponse =
-          "We have a wide range of products. What are you looking for?";
-      } else {
-        botResponse = "Line Busy Please Try Later";
-      }
-
-      newResponses.push({ type: "bot", text: botResponse });
-
-      setChatbotResponses(newResponses);
-    }
-    setUserQuery(""); // Clear the user's input field
-  };
-
-  return (
-    <div>
-      <NavBar>
-        <div className="chatbot-container">
-          <div className="chatbot-card">
-            <p className="chatbot-title">Chatbot</p>
-            <div className="chatbot-messages">
-              {chatbotResponses.map((response, index) => (
-                <div key={index} className={`chatbot-${response.type}`}>
-                  {response.text}
-                </div>
-              ))}
-            </div>
-            <input
-              type="text"
-              placeholder="Type your query here..."
-              value={userQuery}
-              onChange={handleUserQueryChange}
-            />
-            <button className="chatbot-button" onClick={handleSendMessage}>
-              Send
-            </button>
-          </div>
-        </div>
-      </NavBar>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        
+      </div>
+    )
+  }
 }
 
-export default Chatbot;
+export default Chatbot
