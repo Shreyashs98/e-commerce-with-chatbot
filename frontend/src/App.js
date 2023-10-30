@@ -24,14 +24,6 @@ import AdminHome from "./pages/AdminHome";
 import AdminProductDetailPage from "./pages/AdminProductDetailPage";
 import AdminProductFormPage from "./pages/AdminProductFormPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
-import { positions, Provider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
-// import Chatbot from "./pages/Chatbot/Chatbot";
-
-const options = {
-  timeout: 5000,
-  position: positions.BOTTOM_LEFT,
-};
 
 const router = createBrowserRouter([
   {
@@ -138,10 +130,6 @@ const router = createBrowserRouter([
     path: "*",
     element: <PageNotFound></PageNotFound>,
   },
-  // {
-  //   path: "/chatbot",
-  //   element: <Chatbot></Chatbot>,
-  // },
 ]);
 
 function App() {
@@ -156,14 +144,9 @@ function App() {
   }, [dispatch, user]);
 
   return (
-    <>
-      <div className="App">
-        <Provider template={AlertTemplate} {...options}>
-          <RouterProvider router={router} />
-        </Provider>
-        {/* Link must be inside the Provider */}
-      </div>
-    </>
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
   );
 }
 

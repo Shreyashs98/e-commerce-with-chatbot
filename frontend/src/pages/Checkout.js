@@ -71,7 +71,7 @@ function Checkout() {
       // need to redirect from here to a new page of order success.
     } else {
       // TODO : we can use proper messaging popup here
-      alert("Enter Address and Payment method");
+      // alert("Enter Address and Payment method");
     }
     //TODO : Redirect to order-success page
     //TODO : clear cart after order
