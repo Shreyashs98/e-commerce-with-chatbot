@@ -16,7 +16,6 @@ const ordersRouter = require('./routes/Order');
 server.use(express.json());
 server.get("/",(req,res) => {
   res.send("API is running...")
-  console.log(PORT)
 })
 
 //middlewares
