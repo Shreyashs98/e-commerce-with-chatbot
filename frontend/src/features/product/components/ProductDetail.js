@@ -12,10 +12,11 @@ import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import { selectLoggedInUser } from "../../auth/authSlice";
 import { discountedPrice } from "../../../app/constants";
 // import { useAlert } from "react-alert";
+import toast, { Toaster } from 'react-hot-toast';
 import { Grid } from "react-loader-spinner";
 
 // TODO: In server data we will add colors, sizes , highlights. to each product
-
+const notify = () => toast.success('Added to cart');
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
   { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
@@ -327,14 +328,17 @@ export default function ProductDetail() {
                     </div>
                   </RadioGroup>
                 </div> */}
-
+                <div onClick={handleCart}>
                 <button
-                  onClick={handleCart}
+                  onClick={notify}
+                  
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to Cart
                 </button>
+                <Toaster />
+                </div>
               </form>
             </div>
 
