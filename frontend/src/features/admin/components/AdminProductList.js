@@ -192,41 +192,39 @@ export default function AdminProductList() {
               </button>
             </div>
           </div>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <input
-              type="text"
-              className="h-10 px-5 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Search products"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
-            <h2 id="products-heading" className="sr-only">
-              Products
-            </h2>
+  <h2 id="products-heading" className="sr-only">
+    Products
+  </h2>
+  <div className="flex justify-between items-center mb-4">
+    <div>
+      <Link
+        to="/admin/product-form"
+        className="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        New Product
+      </Link>
+    </div>
+    <div>
+      <input
+        type="text"
+        className="h-10 px-5 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Search products"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+    </div>
+  </div>
+  <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+    <DesktopFilter handleFilter={handleFilter} filters={filters}></DesktopFilter>
+    {/* Product grid */}
+    <div className="lg:col-span-3">
+      <ProductGrid products={filteredProducts}></ProductGrid>
+    </div>
+    {/* Product grid end */}
+  </div>
+</section>
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              <DesktopFilter
-                handleFilter={handleFilter}
-                filters={filters}
-              ></DesktopFilter>
-              {/* Product grid */}
-
-              <div className="lg:col-span-3">
-                <div>
-                  <Link
-                    to="/admin/product-form"
-                    className="rounded-md mx-10 my-5 bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Add New Product
-                  </Link>
-                </div>
-                <ProductGrid products={filteredProducts}></ProductGrid>
-              </div>
-              {/* Product grid end */}
-            </div>
-          </section>
 
           {/* section of product and filters ends */}
           <Pagination
