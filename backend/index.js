@@ -12,6 +12,13 @@ const authRouter = require('./routes/Auth');
 const cartRouter = require('./routes/Cart');
 const ordersRouter = require('./routes/Order');
 
+//Routes
+server.use(express.json());
+server.get("/",(req,res) => {
+  res.send("API is running...")
+  console.log(PORT)
+})
+
 //middlewares
 server.use(cors({
     exposedHeaders:['X-Total-Count']
