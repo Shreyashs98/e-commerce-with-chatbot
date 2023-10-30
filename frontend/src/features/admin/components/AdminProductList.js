@@ -208,8 +208,8 @@ export default function AdminProductList() {
     <div>
       <input
         type="text"
-        className="h-10 px-5 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Search products"
+        className="h-10 px-0 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="   Search products"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
