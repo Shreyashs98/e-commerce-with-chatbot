@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import RelatedProducts from "./RelatedProducts";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -373,12 +374,13 @@ export default function ProductDetail() {
               <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
-                <div className="mt-4 space-y-6">
+                <div className="mt-4 mb-6 space-y-6">
                   <p className="text-sm text-gray-600">{product.description}</p>
                 </div>
               </div>
             </div>
           </div>
+          <RelatedProducts category={product.category} />
         </div>
       )}
     </div>
