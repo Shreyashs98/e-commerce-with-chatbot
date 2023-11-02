@@ -64,12 +64,12 @@ export default function ProductList() {
     },
   ];
   const imageUrls = [
-    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/1928ce43c778cd9f.jpg?q=20",
-    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/1ac81f8dc3185d53.jpg?q=20",
-    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/99fae2c9891a1c0c.jpeg?q=20",
-    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/4942953de2f86a9c.jpeg?q=20",
-    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/a6d049a34b1a2468.jpg?q=20",
-    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/337b77b5689fc3e4.jpeg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/6af15eda66fd7747.jpg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/ffeb169a27907387.jpg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/7ef9754529c2da8b.jpeg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/78f0374b0191d762.jpg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/39002010fec3acbb.jpg?q=20",
+    "https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/e238e3eac14abdd8.jpeg?q=20",
   ];
 
   const [filter, setFilter] = useState({});
